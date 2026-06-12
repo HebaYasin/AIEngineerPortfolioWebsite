@@ -6,37 +6,37 @@ const statusConfig: Record<
 > = {
   production: {
     label: 'Production',
-    dotClass: 'bg-emerald-400',
-    bgClass: 'bg-emerald-500/10',
-    textClass: 'text-emerald-400',
+    dotClass: 'bg-neon-green',
+    bgClass: 'bg-neon-green/10',
+    textClass: 'text-neon-green',
     pulse: false,
   },
   research: {
     label: 'Research',
-    dotClass: 'bg-sky-400',
-    bgClass: 'bg-sky-500/10',
-    textClass: 'text-sky-400',
+    dotClass: 'bg-neon-blue',
+    bgClass: 'bg-neon-blue/10',
+    textClass: 'text-neon-blue',
     pulse: false,
   },
   competition: {
     label: 'Competition',
-    dotClass: 'bg-amber-400',
-    bgClass: 'bg-amber-500/10',
-    textClass: 'text-amber-400',
+    dotClass: 'bg-neon-yellow',
+    bgClass: 'bg-neon-yellow/10',
+    textClass: 'text-neon-yellow',
     pulse: false,
   },
   academic: {
     label: 'Academic',
-    dotClass: 'bg-sky-300',
-    bgClass: 'bg-sky-500/10',
-    textClass: 'text-sky-300',
+    dotClass: 'bg-neon-purple',
+    bgClass: 'bg-neon-purple/10',
+    textClass: 'text-neon-purple',
     pulse: false,
   },
   prototype: {
     label: 'Prototype',
-    dotClass: 'bg-orange-400',
-    bgClass: 'bg-orange-500/10',
-    textClass: 'text-orange-400',
+    dotClass: 'bg-neon-pink',
+    bgClass: 'bg-neon-pink/10',
+    textClass: 'text-neon-pink',
     pulse: true,
   },
 };
@@ -49,7 +49,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
   const config = statusConfig[status];
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[0.65rem] font-medium ${config.bgClass} ${config.textClass}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider ${config.bgClass} ${config.textClass}`}
     >
       <span
         className={`w-1.5 h-1.5 rounded-full ${config.dotClass} ${config.pulse ? 'animate-pulse-glow' : ''}`}

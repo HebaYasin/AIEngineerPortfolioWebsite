@@ -59,7 +59,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-border/50"
+      className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/20"
       animate={hidden ? { y: '-100%' } : { y: 0 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
@@ -74,9 +74,14 @@ export function Navbar() {
             e.preventDefault();
             handleNavClick('#home');
           }}
-          className="text-lg font-bold tracking-tight text-foreground hover:text-primary transition-colors"
+          className="text-xl font-bold tracking-tighter font-display flex items-center gap-1.5 group"
         >
-          AC<span className="text-primary">.</span>
+          <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-neon-green to-primary flex items-center justify-center text-primary-foreground text-xs font-bold group-hover:scale-110 transition-transform">
+            A
+          </span>
+          <span className="text-foreground">
+            Alex<span className="text-primary">.</span>
+          </span>
         </a>
 
         {/* Desktop nav links */}
@@ -94,17 +99,13 @@ export function Navbar() {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                  isActive
+                    ? 'text-primary bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
                 }`}
               >
                 {link.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full"
-                  />
-                )}
               </a>
             );
           })}
@@ -112,7 +113,7 @@ export function Navbar() {
 
         {/* Right side */}
         <div className="hidden lg:flex items-center gap-3">
-          <Button variant="outline" size="sm" asChild className="h-8 px-3 text-xs border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50">
+          <Button size="sm" asChild className="h-9 px-4 rounded-full bg-gradient-to-r from-neon-green to-primary text-primary-foreground text-xs font-bold hover:shadow-[0_0_20px_hsl(170_80%_55%/0.2)] transition-all duration-300 hover:scale-105">
             <a href="/resume.pdf">
               <Download className="w-3.5 h-3.5 mr-1.5" />
               Resume
@@ -123,18 +124,21 @@ export function Navbar() {
         {/* Mobile menu */}
         <Sheet>
           <SheetTrigger asChild className="lg:hidden">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
+            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full hover:bg-secondary/50">
               <Menu className="w-5 h-5" />
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] bg-background">
+          <SheetContent side="right" className="w-[300px] bg-background border-l border-border/20">
             <SheetHeader>
-              <SheetTitle className="text-left">
-                AC<span className="text-primary">.</span>
+              <SheetTitle className="text-left flex items-center gap-2">
+                <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-neon-green to-primary flex items-center justify-center text-primary-foreground text-xs font-bold">
+                  A
+                </span>
+                Alex<span className="text-primary">.</span>
               </SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-1 mt-6" aria-label="Mobile navigation">
+            <nav className="flex flex-col gap-1 mt-8" aria-label="Mobile navigation">
               {navLinks.map((link) => (
                 <SheetClose key={link.href} asChild>
                   <a
@@ -143,17 +147,17 @@ export function Navbar() {
                       e.preventDefault();
                       handleNavClick(link.href);
                     }}
-                    className="px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary rounded-md transition-colors"
+                    className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-colors"
                   >
                     {link.label}
                   </a>
                 </SheetClose>
               ))}
             </nav>
-            <div className="mt-6 pt-6 border-t border-border">
-              <Button variant="outline" size="sm" asChild className="w-full h-9 border-primary/30 text-primary hover:bg-primary/10">
+            <div className="mt-8 pt-6 border-t border-border/20">
+              <Button size="sm" asChild className="w-full h-10 rounded-full bg-gradient-to-r from-neon-green to-primary text-primary-foreground text-sm font-bold">
                 <a href="/resume.pdf">
-                  <Download className="w-3.5 h-3.5 mr-1.5" />
+                  <Download className="w-4 h-4 mr-2" />
                   Download Resume
                 </a>
               </Button>

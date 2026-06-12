@@ -2,9 +2,7 @@ import { motion } from 'framer-motion';
 import { fadeIn, viewportOnce } from '@/lib/animations';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { testimonials } from '@/data/testimonials';
-import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
 import { Quote } from 'lucide-react';
 import {
   Carousel,
@@ -16,8 +14,13 @@ import {
 
 export function TestimonialsSection() {
   return (
-    <section aria-labelledby="testimonials-heading" className="py-16 lg:py-20 bg-[hsl(220,18%,6%)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section aria-labelledby="testimonials-heading" className="py-20 lg:py-28 relative">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-neon-purple/5 blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           overline="Testimonials"
           title="What People Say"
@@ -38,35 +41,32 @@ export function TestimonialsSection() {
             <CarouselContent>
               {testimonials.map((t) => (
                 <CarouselItem key={t.id}>
-                  <Card className="bg-card border-border/50">
-                    <CardContent className="p-6 sm:p-8 relative">
-                      <Quote className="w-8 h-8 text-primary/20 absolute top-4 left-4" aria-hidden="true" />
-                      <blockquote className="text-base sm:text-lg text-foreground/90 leading-relaxed italic pl-6 pt-2">
-                        &ldquo;{t.quote}&rdquo;
-                      </blockquote>
-                      <Separator className="my-4 bg-border/30" />
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-10 w-10">
-                          <AvatarFallback className="bg-muted text-muted-foreground text-xs font-semibold">
-                            {t.authorInitials}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="text-sm font-semibold text-foreground">
-                            {t.authorName}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {t.authorTitle}, {t.authorCompany}
-                          </p>
-                        </div>
+                  <div className="glass rounded-2xl border border-border/20 p-8 sm:p-10 relative overflow-hidden">
+                    <Quote className="w-10 h-10 text-primary/15 absolute top-5 left-5" aria-hidden="true" />
+                    <blockquote className="text-lg sm:text-xl text-foreground/90 leading-relaxed pl-4 pt-4 font-light italic">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                    <div className="mt-6 pt-6 border-t border-border/20 flex items-center gap-4">
+                      <Avatar className="h-11 w-11 border-2 border-primary/20">
+                        <AvatarFallback className="bg-primary/10 text-primary text-xs font-bold">
+                          {t.authorInitials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="text-sm font-bold text-foreground">
+                          {t.authorName}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {t.authorTitle}, {t.authorCompany}
+                        </p>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-14 hidden sm:flex" />
-            <CarouselNext className="-right-14 hidden sm:flex" />
+            <CarouselPrevious className="-left-14 hidden sm:flex border-primary/20 hover:border-primary/40 hover:bg-primary/10" />
+            <CarouselNext className="-right-14 hidden sm:flex border-primary/20 hover:border-primary/40 hover:bg-primary/10" />
           </Carousel>
         </motion.div>
       </div>
