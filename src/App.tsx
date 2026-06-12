@@ -9,6 +9,7 @@ import { CareerTimelineSection } from '@/components/sections/CareerTimelineSecti
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { AboutMeSection } from '@/components/sections/AboutMeSection';
 import { useSpotlight } from '@/hooks/use-spotlight';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Navbar />
       <main className="pt-16">
         <HeroSection />
+        <AboutMeSection />
         <StatsSection />
         <FeaturedProjectsSection />
         <TechStackSection />
