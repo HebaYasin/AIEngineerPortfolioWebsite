@@ -105,7 +105,7 @@ export function CareerTimelineSection() {
 
                   {/* Date label — positioned on the opposite side from the card */}
                   <span
-                    className={`absolute top-2 text-xs font-bold font-mono-tech text-primary whitespace-nowrap ${isLeft ? 'right-[calc(50%+20px)] text-right' : 'left-[calc(50%+20px)] text-left'}`}
+                    className={`absolute top-2 text-xs font-bold font-mono-tech text-primary whitespace-nowrap ${isLeft ? 'left-[calc(50%+20px)] text-left' : 'right-[calc(50%+20px)] text-right'}`}
                   >
                     {entry.period}
                   </span>
