@@ -27,6 +27,7 @@ export interface Project {
   description: string;
   technologies: string[];
   metrics: ProjectMetric[];
+  image: string;
   github?: string;
   demo?: string;
 }
@@ -55,6 +56,7 @@ export const projects: Project[] = [
       { label: 'Latency', value: '340ms' },
       { label: 'Daily Queries', value: '10K+' },
     ],
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
     demo: 'https://example.com',
   },
@@ -72,6 +74,7 @@ export const projects: Project[] = [
       { label: 'Agents', value: '7 types' },
       { label: 'Uptime', value: '99.9%' },
     ],
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
     demo: 'https://example.com',
   },
@@ -89,6 +92,7 @@ export const projects: Project[] = [
       { label: 'Avg Improvement', value: '+23%' },
       { label: 'Training Time', value: '-60%' },
     ],
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
   {
@@ -104,6 +108,7 @@ export const projects: Project[] = [
       { label: 'F1 Score', value: '0.91' },
       { label: 'Documents/Day', value: '5K' },
     ],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
     demo: 'https://example.com',
   },
@@ -120,6 +125,7 @@ export const projects: Project[] = [
       { label: 'Context Window', value: '128K' },
       { label: 'Tools', value: '6' },
     ],
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
   {
@@ -135,6 +141,7 @@ export const projects: Project[] = [
       { label: 'Top Finish', value: '3%' },
       { label: 'Competitions', value: '8' },
     ],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
   {
@@ -150,6 +157,7 @@ export const projects: Project[] = [
       { label: 'Param Reduction', value: '-40%' },
       { label: 'Accuracy', value: '96.1%' },
     ],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
   {
@@ -164,6 +172,7 @@ export const projects: Project[] = [
     metrics: [
       { label: 'Algorithms', value: '15' },
     ],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
   {
@@ -179,6 +188,7 @@ export const projects: Project[] = [
       { label: 'Stars', value: '500+' },
       { label: 'PRs Merged', value: '12' },
     ],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
     github: 'https://github.com',
   },
 ];

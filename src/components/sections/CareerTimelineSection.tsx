@@ -98,39 +98,46 @@ export function CareerTimelineSection() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={viewportMargin}
-                  className={`relative flex ${isLeft ? 'justify-start' : 'justify-end'}`}
+                  className="relative flex justify-center"
                 >
-                  <div className="absolute left-1/2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-2 border-background glow-primary" aria-hidden="true" />
+                  {/* Dot on the line */}
+                  <div className="absolute left-1/2 top-2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-2 border-background glow-primary z-10" aria-hidden="true" />
+
+                  {/* Date label — positioned on the opposite side from the card */}
                   <span
-                    className={`absolute top-2 text-xs font-bold font-mono-tech text-primary ${isLeft ? 'right-[calc(50%+24px)]' : 'left-[calc(50%+24px)]'}`}
+                    className={`absolute top-2 text-xs font-bold font-mono-tech text-primary whitespace-nowrap ${isLeft ? 'right-[calc(50%+20px)] text-right' : 'left-[calc(50%+20px)] text-left'}`}
                   >
                     {entry.period}
                   </span>
-                  <div className={`glass rounded-2xl border border-border/30 p-6 max-w-md hover:border-primary/20 transition-colors duration-300 ${isLeft ? 'mr-[calc(50%+24px)]' : 'ml-[calc(50%+24px)]'}`}>
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-lg font-bold text-foreground font-display">{entry.role}</h3>
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.6rem] font-bold border ${typeBadge[entry.type]}`}>
-                        {typeLabel[entry.type]}
-                      </span>
+
+                  {/* Card — pushed away from center to leave room for the date on the other side */}
+                  <div className={`w-[calc(50%-60px)] ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
+                    <div className="glass rounded-2xl border border-border/30 p-6 hover:border-primary/20 transition-colors duration-300">
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <h3 className="text-lg font-bold text-foreground font-display">{entry.role}</h3>
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.6rem] font-bold border shrink-0 ${typeBadge[entry.type]}`}>
+                          {typeLabel[entry.type]}
+                        </span>
+                      </div>
+                      {entry.companyUrl ? (
+                        <a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                          {entry.company}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{entry.company}</p>
+                      )}
+                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{entry.description}</p>
+                      {entry.highlights && (
+                        <ul className="mt-3 space-y-1.5">
+                          {entry.highlights.map((h) => (
+                            <li key={h} className="flex items-start gap-2 text-sm text-foreground/80">
+                              <CheckCircle2 className="w-4 h-4 text-neon-green shrink-0 mt-0.5" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
-                    {entry.companyUrl ? (
-                      <a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                        {entry.company}
-                      </a>
-                    ) : (
-                      <p className="text-sm text-muted-foreground">{entry.company}</p>
-                    )}
-                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{entry.description}</p>
-                    {entry.highlights && (
-                      <ul className="mt-3 space-y-1.5">
-                        {entry.highlights.map((h) => (
-                          <li key={h} className="flex items-start gap-2 text-sm text-foreground/80">
-                            <CheckCircle2 className="w-4 h-4 text-neon-green shrink-0 mt-0.5" />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </motion.div>
               );

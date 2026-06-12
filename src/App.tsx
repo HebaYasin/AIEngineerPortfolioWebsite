@@ -9,10 +9,13 @@ import { CareerTimelineSection } from '@/components/sections/CareerTimelineSecti
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { useSpotlight } from '@/hooks/use-spotlight';
 
 function App() {
+  const spotlightRef = useSpotlight();
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div ref={spotlightRef} className="min-h-screen bg-background text-foreground spotlight">
       <Navbar />
       <main className="pt-16">
         <HeroSection />

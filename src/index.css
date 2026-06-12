@@ -94,4 +94,22 @@
   .border-gradient {
     border-image: linear-gradient(135deg, hsl(170 80% 55% / 0.3), hsl(280 70% 60% / 0.3)) 1;
   }
+  .spotlight {
+    --spotlight-x: 50%;
+    --spotlight-y: 50%;
+    position: relative;
+  }
+  .spotlight::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: radial-gradient(
+      600px circle at var(--spotlight-x) var(--spotlight-y),
+      hsl(170 80% 55% / 0.06),
+      transparent 40%
+    );
+    transition: opacity 0.3s;
+  }
 }

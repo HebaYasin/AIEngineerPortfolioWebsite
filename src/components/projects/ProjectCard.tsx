@@ -1,29 +1,43 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { Project } from '@/data/projects';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { CategoryChip } from '@/components/shared/CategoryChip';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ChevronDown } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const [techExpanded, setTechExpanded] = useState(false);
+  const hasMore = project.technologies.length > 4;
+
   return (
     <motion.div layout whileHover={{ y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 300, damping: 20 } }}>
       <div className="h-full glass rounded-2xl border border-border/20 hover:border-primary/20 overflow-hidden transition-all duration-300 hover:glow-primary group">
-        {/* Gradient top bar */}
-        <div className="h-0.5 bg-gradient-to-r from-neon-green via-neon-blue to-neon-purple opacity-50 group-hover:opacity-100 transition-opacity" />
-
-        <div className="p-5 space-y-3">
-          <div className="flex items-center justify-between gap-2">
+        {/* Project image */}
+        <div className="relative h-40 overflow-hidden">
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          {/* Gradient top bar */}
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-neon-green via-neon-blue to-neon-purple opacity-50 group-hover:opacity-100 transition-opacity" />
+          {/* Badges overlay */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
             <CategoryChip category={project.category} />
             <StatusBadge status={project.status} />
           </div>
+        </div>
 
+        <div className="p-5 space-y-3">
           <h3 className="text-lg font-bold tracking-tight font-display group-hover:text-primary transition-colors">
             {project.title}
           </h3>
@@ -34,36 +48,47 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
           <div className="h-px bg-gradient-to-r from-transparent via-border/40 to-transparent" />
 
-          <TooltipProvider>
-            <div className="flex flex-wrap gap-1.5">
-              {project.technologies.slice(0, 4).map((tech) => (
-                <Badge
+          {/* Expandable tech tags */}
+          <div className="flex flex-wrap gap-1.5">
+            {project.technologies.slice(0, 4).map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="font-mono-tech text-[0.65rem] px-2 py-0.5 rounded-lg bg-secondary/40 border border-border/20 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors"
+              >
+                {tech}
+              </Badge>
+            ))}
+            <AnimatePresence>
+              {techExpanded && project.technologies.slice(4).map((tech) => (
+                <motion.span
                   key={tech}
-                  variant="secondary"
-                  className="font-mono-tech text-[0.65rem] px-2 py-0.5 rounded-lg bg-secondary/40 border border-border/20 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 >
-                  {tech}
-                </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="font-mono-tech text-[0.65rem] px-2 py-0.5 rounded-lg bg-secondary/40 border border-border/20 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors"
+                  >
+                    {tech}
+                  </Badge>
+                </motion.span>
               ))}
-              {project.technologies.length > 4 && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Badge
-                      variant="secondary"
-                      className="font-mono-tech text-[0.65rem] px-2 py-0.5 rounded-lg bg-muted text-muted-foreground cursor-default"
-                    >
-                      +{project.technologies.length - 4} more
-                    </Badge>
-                  </TooltipTrigger>
-                  <TooltipContent className="bg-popover text-popover-foreground border-border/30">
-                    <p className="text-xs">
-                      {project.technologies.slice(4).join(', ')}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
-            </div>
-          </TooltipProvider>
+            </AnimatePresence>
+            {hasMore && (
+              <button
+                onClick={() => setTechExpanded(!techExpanded)}
+                className="inline-flex items-center gap-0.5 font-mono-tech text-[0.65rem] px-2 py-0.5 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer"
+                aria-expanded={techExpanded}
+                aria-label={techExpanded ? 'Show fewer technologies' : `Show ${project.technologies.length - 4} more technologies`}
+              >
+                {techExpanded ? 'less' : `+${project.technologies.length - 4} more`}
+                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${techExpanded ? 'rotate-180' : ''}`} />
+              </button>
+            )}
+          </div>
 
           {project.metrics.length > 0 && (
             <div className="flex flex-wrap gap-5 pt-1">
