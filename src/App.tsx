@@ -6,7 +6,7 @@ import { StatsSection } from '@/components/sections/StatsSection';
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection';
 import { TechStackSection } from '@/components/sections/TechStackSection';
 import { CareerTimelineSection } from '@/components/sections/CareerTimelineSection';
-import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { CertificationsSection } from '@/components/sections/CertificationsSection';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { ProjectsSection } from '@/components/projects/ProjectsSection';
 import { AboutMeSection } from '@/components/sections/AboutMeSection';
@@ -26,7 +26,7 @@ function App() {
         <TechStackSection />
         <CareerTimelineSection />
         <ProjectsSection />
-        <TestimonialsSection />
+        <CertificationsSection />
         <ContactCTA />
       </main>
       <Footer />

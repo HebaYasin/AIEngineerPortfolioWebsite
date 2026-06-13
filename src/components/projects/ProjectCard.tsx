@@ -14,6 +14,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const [techExpanded, setTechExpanded] = useState(false);
+  const [descExpanded, setDescExpanded] = useState(false);
   const hasMore = project.technologies.length > 4;
 
   return (
@@ -42,9 +43,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.title}
           </h3>
 
-          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-            {project.description}
-          </p>
+          <div className="relative">
+            <p className={`text-sm text-muted-foreground leading-relaxed ${descExpanded ? '' : 'line-clamp-2'}`}>
+              {project.description}
+            </p>
+            <button
+              onClick={() => setDescExpanded(!descExpanded)}
+              className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:text-neon-purple transition-colors mt-0.5"
+              aria-expanded={descExpanded}
+              aria-label={descExpanded ? 'Show less' : 'Read more'}
+            >
+              {descExpanded ? 'less' : 'read more'}
+              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${descExpanded ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-border/40 to-transparent" />
 
